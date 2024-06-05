@@ -1,7 +1,7 @@
 import "./Result.css";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import HomeLogo from "../../common/homeLogo/HomeLogo";
 import SiteLogo from "../../common/siteLogo/SiteLogo";

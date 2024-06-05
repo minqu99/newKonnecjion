@@ -3,7 +3,6 @@ import ToolTip from "./toolTip/ToolTip";
 import ToolTip2 from "./toolTip/ToolTip2";
 import SentenceLevel from "../sticks/SentenceLevel";
 import LexiconLevel from "../sticks/LexiconLevel";
-import AnalyzeKuromoji from "../../components/result/analyze/AnalyzeKuromoji";
 import BarGraph from "../sticks/BarGraph";
 
 export default function ResultBox({ analyzeSentence, translatedText }) {
@@ -12,7 +11,6 @@ export default function ResultBox({ analyzeSentence, translatedText }) {
       <div className="line">
         <div className="result-box box-light box1">
           <div className="result-title">종합 평가</div>
-          <AnalyzeKuromoji analyzeSentence={analyzeSentence} />
         </div>
         <div className="result-box box-dark box2">
           <div className="result-title">문장 수준</div>
