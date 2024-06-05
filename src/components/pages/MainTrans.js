@@ -4,7 +4,7 @@ import TransSubmit from "./TransSubmit";
 import SameLevel from "./SameLevel";
 import TranslationText from "./TranslationText";
 import ExplainText1 from "./ExplainText1.js";
-import HomeButton from "../../common/homeLogo/HomeLogo.js"
+import HomeLogo from "../../common/homeLogo/HomeLogo.js"
 import SiteLogo from "../../common/siteLogo/SiteLogo.js"
 
 import { loadSentences, getRandomSentence, getUserLevel } from '../../common/levelTrans/levelTrans.mjs';
@@ -12,38 +12,35 @@ import { loadSentences, getRandomSentence, getUserLevel } from '../../common/lev
 export default function Main(){
     const [currentSentence, setCurrentSentence] = useState("");
     const [userLevel] = useState(getUserLevel());
+    const [translatedText, setTranslatedText] = useState("");
 
-  useEffect(() => {
-    const fetchSentences = async () => {
-      const sentences = await loadSentences();
-      const initialSentence = getRandomSentence(userLevel, sentences);
-      setCurrentSentence(initialSentence);
-    };
-    fetchSentences();
-  }, [userLevel]);
+    useEffect(() => {
+        const fetchSentences = async () => {
+            const userLevel = getUserLevel();
+            const sentences = await loadSentences();
+            const initialSentence = getRandomSentence(userLevel, sentences);
+            setCurrentSentence(initialSentence);
+            localStorage.setItem('currentSentence', initialSentence);
 
-  const handleNextSentence = async () => {
-    const sentences = await loadSentences();
-    const newSentence = getRandomSentence(userLevel, sentences);
-    if (newSentence) {
-      setCurrentSentence(newSentence);
-    } else {
-    //   alert("모든 문장을 사용했습니다.");
-    }
-  };
+            console.log("MainTrans currentSentence:", initialSentence);
+        };
+        fetchSentences();
+    }, []);
 
     const handleTextChange = (text) => {
-        localStorage.setItem('translatedText', text); // 입력된 값을 localStorage에 저장
+        setTranslatedText(text);
+        localStorage.setItem('translatedText', text);
     };
 
     return (
         <div>
-            <HomeButton />
+            <HomeLogo />
+            <br />
             <SiteLogo />
             <ExplainText1 />
-            <SameLevel currentSentence={currentSentence} onNextSentence={handleNextSentence} />
+            <SameLevel currentSentence={currentSentence} />
             <TranslationText onTextChange={handleTextChange} />
-            <TransSubmit />
+            <TransSubmit translatedText={translatedText} />
         </div>
     );
 }

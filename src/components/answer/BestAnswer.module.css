@@ -1,25 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
 .best{
-    width: 80%;
-    height:163px;
-    background-color:#E2E2E2 ;
-    border-radius: 25px;
-    margin-top:20px;
-    margin-left: 10%;
-  }
+  width: 76%;
+  height:135px;
+  background-color:#E2E2E2 ;
+  border-radius: 25px;
+  margin-top:10px;
+  margin-left: 10%;
+  -border:1px solid red;
+  padding: 2%;
+}
 .best p{
-    text-align: left;
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 1em;
-  }
+  text-align: left;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1em;
+}
 .deelptext{
-  width: 92%;
-  height:70%;
+  width: 98%;
+  height:95%;
 
   overflow: auto;
-  padding:1.5%;
-  margin-left: 20px;
+  -padding:1.5%;
+  margin-left: 0px;
   margin-top: -10px;
 }
 

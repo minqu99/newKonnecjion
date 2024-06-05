@@ -1,7 +1,7 @@
 import sentences from './sentences.json';
 
-let userLevel = "일반"; // 여기서 레벨 값을 설정합니다.
-let previousSentence = "";
+let userLevel = "일반";
+let previousSentences = [];
 
 export const loadSentences = async () => {
   return sentences;
@@ -17,9 +17,9 @@ export const getRandomSentence = (level, sentences) => {
   do {
     const randomIndex = Math.floor(Math.random() * availableSentences.length);
     newSentence = availableSentences[randomIndex];
-  } while (newSentence === previousSentence && availableSentences.length > 1);
+  } while (previousSentences.includes(newSentence) && availableSentences.length > 1);
 
-  previousSentence = newSentence;
+  previousSentences.push(newSentence);
   return newSentence;
 };
 

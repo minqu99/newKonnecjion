@@ -11,11 +11,13 @@ export default function TranslationText({ onTextChange }) {
   };
 
   return (
-    <textarea
-      className={styles.translationText}
-      placeholder="위 문장을 번역해주세요."
-      value={inputValue}
-      onChange={handleChange}
-    ></textarea>
+    <div className={styles.transbox} >
+      <textarea
+        className={styles.translationText}
+        placeholder="위 문장을 번역해주세요."
+        value={inputValue}
+        onChange={handleChange}
+      ></textarea>
+      </div>
   );
 }
