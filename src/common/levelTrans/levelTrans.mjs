@@ -1,6 +1,6 @@
 import sentences from './sentences.json';
 
-let userLevel = "일반";
+let userLevel = "유치원";
 let previousSentences = [];
 
 export const loadSentences = async () => {
