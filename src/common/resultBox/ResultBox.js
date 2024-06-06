@@ -5,7 +5,16 @@ import SentenceLevel from "../sticks/SentenceLevel";
 import LexiconLevel from "../sticks/LexiconLevel";
 import BarGraph from "../sticks/BarGraph";
 
+// import FadeLoader from "react-spinners/FadeLoader";
+// import React, { useState } from "react";
+
 export default function ResultBox({ analyzeSentence, translatedText }) {
+  // const [loading, setLoading] = useState(true);
+
+  // const handleAnalysisComplete = () => {
+  //   setLoading(false);
+  // };
+
   return (
     <div>
       <div className="line">

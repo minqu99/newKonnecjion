@@ -82,13 +82,19 @@ const hasSpecificPos = (tokens, posList) => {
   return false;
 };
 
-// [함수3] 문장 구조 점수 -- 수정 중
+// [함수3] 문장 구조 점수
 const calculateSentenceScore = (text, setScore) => {
-  const lengthScore = Math.max((splitedTextAnalyze(text) / 100) * 50);
-  // const kanjiScore = Math.max((calculateKanji(text) / 100) * 50);
+  const maxScorePerSection = 33.3; // 각 부분의 최대 점수
+  const lengthScore = Math.min(
+    (splitedTextAnalyze(text) / 100) * maxScorePerSection,
+    maxScorePerSection
+  );
 
   calculateDuplicateWordRatio(text, (duplicateWordRatio) => {
-    const diversityScore = Math.min((duplicateWordRatio / 100) * 50);
+    const diversityScore = Math.min(
+      (duplicateWordRatio / 100) * maxScorePerSection,
+      maxScorePerSection
+    );
 
     kuromoji
       .builder({ dicPath: process.env.PUBLIC_URL + "/kuromoji-dict/" })
@@ -108,12 +114,14 @@ const calculateSentenceScore = (text, setScore) => {
             containsNoun &&
             (containsVerb || containsAdjective) &&
             containAuxiliary
-              ? 50
+              ? maxScorePerSection
               : 0;
 
           const totalScore = lengthScore + diversityScore + structureScore;
+          const maxPossibleScore = maxScorePerSection * 3; // 각 부분의 최대 점수를 합친 값
+          const percentageScore = (totalScore / maxPossibleScore) * 100; // 총점을 백분율로 변환
 
-          setScore(totalScore.toFixed(0));
+          setScore(percentageScore.toFixed(0)); // 소수점 이하 자리 제거하여 문자열로 반환
         }
       });
   });
