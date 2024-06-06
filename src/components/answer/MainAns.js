@@ -4,12 +4,12 @@ import BestAnswer from "./BestAnswer";
 import Finish from "./Finish";
 import UserTrans from "./UserTrans";
 import ExplainText1 from "../pages/ExplainText1";
-import HomeButton from "../../common/homeLogo/HomeLogo.js"
+import HomeLogo from "../../common/homeLogo/HomeLogo.js"
 import SiteLogo from "../../common/siteLogo/SiteLogo.js"
 
 import { translateText } from '../result/deepltrans.js'; 
 
-import { loadSentences, getRandomSentence, getUserLevel } from '../../common/levelTrans/levelTrans.mjs';
+import { loadSentences,getRandomSentence, getUserLevel } from '../../common/levelTrans/levelTrans.mjs';
 
 export default function MainAns(){
 
@@ -19,25 +19,29 @@ export default function MainAns(){
     const [currentSentence, setCurrentSentence] = useState("");
     const [userLevel] = useState(getUserLevel());
 
-    const targetLang = 'JA';
+    const targetLang = 'KO';
 
     useEffect(() => {
-        const text = localStorage.getItem('translatedText') || '';
-        setUserText(text);
-        
-        if (text) {
+        // 로컬 저장소에서 문장 및 사용자 텍스트 불러오기
+        const storedSentence = localStorage.getItem('currentSentence');
+        const storedUserText = localStorage.getItem('translatedText') || '';
+
+        if (storedSentence) {
+            setCurrentSentence(storedSentence);
             const fetchTranslation = async () => {
                 try {
-                    const result = await translateText(text, targetLang);
+                    const result = await translateText(storedSentence, 'KO');
                     setDeeplTrans(result);
-                    localStorage.setItem('translatedText', result);
                 } catch (err) {
-    
+                    console.error('Error translating sentence:', err);
                 }
             };
             fetchTranslation();
         }
-    }, [targetLang]);
+
+        setUserText(storedUserText);
+    }, []);
+
 
     // 초기화 함수
     const handleReset = () => {
@@ -49,15 +53,24 @@ export default function MainAns(){
         const newSentence = getRandomSentence(userLevel, sentences);
         if (newSentence) {
             setCurrentSentence(newSentence);
+            try {
+                const translatedSentence = await translateText(newSentence, 'KO');
+                setDeeplTrans(translatedSentence);
+                localStorage.setItem('translatedText', translatedSentence);
+            } catch (err) {
+                console.error('Error translating sentence:', err);
+            }
         } else {
             // alert("모든 문장을 사용했습니다.");
         }
     };
 
 
+
     return (
         <div>
-            <HomeButton />
+            <HomeLogo />
+            <br />
             <SiteLogo />
             <ExplainText1 />
             <UserTrans translatedText={userText} />
