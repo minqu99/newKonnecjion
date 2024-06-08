@@ -34,7 +34,18 @@ function Input() {
   };
 
   const goToResult = () => {
-    navigate("/Result-page", { state: { text } });
+    if (text.trim() === "") {
+      Swal.fire({
+        text: "텍스트를 입력하세요.",
+        icon: "warning",
+        confirmButtonText: "확인",
+        customClass: {
+          popup: "my-custom-class", // Apply custom class to the popup
+        },
+      });
+    } else {
+      navigate("/Result-page", { state: { text } });
+    }
   }; // navigate to result page and get userText
 
   return (
