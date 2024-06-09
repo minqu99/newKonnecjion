@@ -44,6 +44,30 @@ function Input() {
         },
       });
     } else {
+      //     try {
+      //       const res = await fetch('http://your-backend-api-endpoint.com/api', {
+      //         method: 'POST',
+      //         headers: {
+      //           'Content-Type': 'application/json'
+      //         },
+      //         body: JSON.stringify({ text })
+      //       });
+      //       const data = await res.json();
+      //       setResponse(data.message);  // 응답 값을 상태로 저장
+      //       navigate("/Result-page", { state: { text, response: data.message } });  // 응답 값을 함께 전달
+      //     } catch (error) {
+      //       console.error('Error:', error);
+      //       Swal.fire({
+      //         text: "서버와의 통신 중 오류가 발생했습니다.",
+      //         icon: "error",
+      //         confirmButtonText: "확인",
+      //         customClass: {
+      //           popup: "my-custom-class", // Apply custom class to the popup
+      //         },
+      //       });
+      //     }
+      //   }
+      // }; // navigate to result page and get userText
       navigate("/Result-page", { state: { text } });
     }
   }; // navigate to result page and get userText
